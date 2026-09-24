@@ -4,10 +4,26 @@ from __future__ import annotations
 
 import json
 
+import importlib.util
+import sys
+from pathlib import Path
+
 import pytest
 
-from plugins.msgraph import register
-from plugins.msgraph import tools
+
+_PLUGIN_DIR = Path(__file__).resolve().parent
+_SPEC = importlib.util.spec_from_file_location(
+    "msgraph_plugin",
+    _PLUGIN_DIR / "__init__.py",
+    submodule_search_locations=[str(_PLUGIN_DIR)],
+)
+assert _SPEC is not None and _SPEC.loader is not None
+_PLUGIN = importlib.util.module_from_spec(_SPEC)
+sys.modules[_SPEC.name] = _PLUGIN
+_SPEC.loader.exec_module(_PLUGIN)
+
+register = _PLUGIN.register
+tools = _PLUGIN.tools
 
 
 class _ToolContext:

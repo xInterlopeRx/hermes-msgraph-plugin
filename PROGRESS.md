@@ -38,10 +38,10 @@ The standalone plugin is installed at:
 ~/.hermes/plugins/msgraph/
 ```
 
-The source copy is:
+The standalone source repository is:
 
 ```text
-plugins/msgraph/
+https://github.com/xInterlopeRx/hermes-msgraph-plugin
 ```
 
 Required profile secrets:

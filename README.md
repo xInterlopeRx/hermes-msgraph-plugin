@@ -6,11 +6,13 @@ authentication.
 
 ## Install as a standalone plugin
 
-Copy this directory into the active Hermes profile:
+Clone this repository, then copy the plugin package into the active Hermes
+profile:
 
 ```bash
+git clone https://github.com/xInterlopeRx/hermes-msgraph-plugin.git /tmp/hermes-msgraph-plugin
 mkdir -p ~/.hermes/plugins
-cp -a plugins/msgraph ~/.hermes/plugins/msgraph
+cp -a /tmp/hermes-msgraph-plugin/. ~/.hermes/plugins/msgraph
 hermes plugins enable msgraph
 ```
 
