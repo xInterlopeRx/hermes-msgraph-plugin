@@ -1,0 +1,32 @@
+version: "2026-09-26.1"
+domain: documents
+description: Conservative sample rules for document and file management.
+defaults:
+  effect: deny
+  requires_human_approval: true
+rules:
+  - id: documents.read
+    actions: [document.read, document.list, document.search, document.get_metadata]
+    effect: allow
+    requires_human_approval: false
+    reason: Read-only document access is allowed within the granted Graph scope.
+  - id: documents.download
+    actions: [document.download]
+    effect: allow
+    requires_human_approval: true
+    reason: Downloading a document requires explicit approval and an auditable request.
+  - id: documents.write
+    actions: [document.create, document.update, document.move, document.rename]
+    effect: allow
+    requires_human_approval: true
+    reason: Document mutations require explicit human approval.
+  - id: documents.delete
+    actions: [document.delete, document.delete_version]
+    effect: deny
+    requires_human_approval: true
+    reason: Destructive document deletion is denied by the sample policy.
+  - id: documents.share
+    actions: [document.share, document.change_permissions, document.create_link]
+    effect: deny
+    requires_human_approval: true
+    reason: Sharing and permission changes are denied by the sample policy.

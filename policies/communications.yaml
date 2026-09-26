@@ -1,0 +1,27 @@
+version: "2026-09-26.1"
+domain: communications
+description: Conservative sample rules for mail and calendar management.
+defaults:
+  effect: deny
+  requires_human_approval: true
+rules:
+  - id: communications.read
+    actions: [mail.read, mail.list, calendar.read, calendar.list, contact.read, contact.list]
+    effect: allow
+    requires_human_approval: false
+    reason: Read-only communication access is allowed within the granted Graph scope.
+  - id: communications.draft
+    actions: [mail.create_draft, calendar.create_draft]
+    effect: allow
+    requires_human_approval: true
+    reason: Draft creation requires explicit approval.
+  - id: communications.send
+    actions: [mail.send, calendar.send_invitation]
+    effect: deny
+    requires_human_approval: true
+    reason: Sending messages or invitations is denied by the sample policy.
+  - id: communications.mutate
+    actions: [mail.update, mail.move, mail.delete, calendar.update, calendar.delete]
+    effect: deny
+    requires_human_approval: true
+    reason: Mail and calendar mutations are denied by the sample policy.

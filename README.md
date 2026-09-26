@@ -4,6 +4,23 @@ Read-only Microsoft Graph access for Hermes. The plugin exposes calendar,
 mail, and contact tools using Microsoft Entra app-only client-credentials
 authentication.
 
+## Repository layout
+
+This repository is also the home for the future Microsoft Graph MCP adapter and
+the shared policy engine:
+
+- Native Hermes plugin: root `plugin.yaml`, `__init__.py`, and `tools.py`.
+- Shared policy engine: `packages/policy_engine/`.
+- MCP adapter API surface: `mcp_server/`.
+- Conservative sample policies: `policies/documents.yaml` and
+  `policies/communications.yaml`.
+
+The sample policies allow read-only document and communication operations,
+require explicit approval for reversible mutations, and deny destructive,
+sending, sharing, and permission-changing actions. They are examples only and
+must be reviewed before production use. The MCP server must call
+`policy_check` before any consequential Graph action.
+
 ## Install as a standalone plugin
 
 Clone this repository, then copy the plugin package into the active Hermes
